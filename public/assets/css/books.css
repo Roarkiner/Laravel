@@ -1,0 +1,92 @@
+main{
+    overflow-y: scroll;
+}
+
+table{
+    position: relative;
+    border-collapse: collapse;
+    margin: 0 auto;
+    border: 3px solid black;
+}
+
+th, td{
+    border: 2px solid black;
+    padding: 5px 1em;
+    font-size: 1.4em;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th{
+    background-color: #555;
+    border: 3px solid black;
+}
+
+td:first-child:hover{
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+tr:nth-child(even), thead{
+    background-color: #888;
+    color: white;
+}
+
+.fixed{
+    position: fixed;
+}
+
+.book-detail{
+    top: 20vh;
+    left: 20vw;
+    background-color: #fff;
+    border: 1px solid black;
+    height: 60vh;
+    width: 60vw;
+    z-index: 3;
+    padding: 20px;
+    font-size: large;
+}
+
+.background-dark{
+    top: 0;
+    left: 0;
+    background-color: black;
+    opacity: 0.5;
+    height: 100vh;
+    width: 100vw;
+    z-index: 2;
+}
+
+#close-icon{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 20px;
+    cursor: pointer;
+}
+
+#close-icon:hover{
+    opacity: 0.5;
+}
+
+.book-detail p{
+    margin: 1em 0;
+}
+
+#title-detail{
+    font-size: 2em;
+}
+
+#author-detail{
+    font-size: large;
+}
+
+#author-detail span{
+    font-style: italic;
+}
+
+#parution-detail span{
+    font-weight: bold;
+}

@@ -42,10 +42,30 @@
         </thead>
         @foreach ($books as $book)
             <tr>
-                <td class='title-td' data-author="{{ $book->author->name }}" data-publication_year="{{ $book->publication_year }}" data-genre="{{ $book->genre }}" data-synopsis="{{ $book->synopsis }}">{{ $book->title }}</td>
+                <td class='title-td' data-author="{{ $book->author->name }}" 
+                data-publication_year="{{ $book->publication_year }}" 
+                data-genre="
+                @foreach ($book->genres as $key => $genre)
+                    @if ($key === count($book->genres) - 1)
+                        {{ $genre->name }}    
+                    @else
+                        {{ $genre->name . ", "}}
+                    @endif
+                @endforeach" 
+                data-synopsis="{{ $book->synopsis }}">
+                    {{ $book->title }}
+                </td>
                 <td>{{ $book->author->name }}</td>
                 <td>{{ $book->publication_year }}</td>
-                <td>{{ $book->genre }}</td>
+                <td>
+                    @foreach ($book->genres as $key => $genre)
+                        @if ($key === count($book->genres) - 1)
+                            {{ $genre->name }}    
+                        @else
+                            {{ $genre->name . ", "}}
+                        @endif
+                    @endforeach
+                </td>
                 <td class='delete'>
                     <form action="/delete_book" method="post">
                         @csrf
@@ -70,7 +90,7 @@
         <h2 id="title-detail">{{ $books[0]->title }}</h2>
         <p>Author : <span id="author-detail">{{ $books[0]->author->name }}</span></p>
         <p>Year of publication : <span id="parution-detail">{{ $books[0]->publication_year }}</span></p>
-        <p>Genre : <span id="genre-detail">{{ $books[0]->genre }}</span></p>
+        <p>Genres : <span id="genre-detail">{{ $books[0]->genre }}</span></p>
         <p>Synopsis : <span id="synopsis-detail">{{ $books[0]->synopsis }}</span></p>
     </div>
 

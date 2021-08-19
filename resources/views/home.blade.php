@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layouts/base')
 
 @section('css')
     <link rel="stylesheet" href="assets/css/home.css">

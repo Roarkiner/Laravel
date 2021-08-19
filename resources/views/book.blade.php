@@ -1,13 +1,12 @@
-@extends('base')
+@extends('layouts/base')
 
 @section('css')
-    <link rel="stylesheet" href="assets/css/books.css">
+    <link rel="stylesheet" href="assets/css/book.css">
 @endsection
 
 @section('script')
-    <script type="text/javascript" defer>
-        var data = @php echo ($books->toJson()); @endphp;
-    </script>
+    <script type="text/javascript" defer></script>
+    <script src="assets/js/book.js" type="text/javascript" defer></script>
 @endsection
 
 @section('title', 'Books')
@@ -17,19 +16,50 @@
     <br>
     <h2>List of Books</h2>
     <br>
+    @if (session()->exists('deleted'))
+        <span class="status">Book was deleted successfully</span>
+        <br>
+    @endif
+
+    @if (session()->exists('added'))
+        <span class="status">Book was added succefully</span>
+        <br>
+    @endif
+
+    @if (session()->exists('modified'))
+        <span class="status">Book was modified succefully</span>
+        <br>
+    @endif
+
     <table>
         <thead>
             <th>Title</th>
             <th>Author</th>
             <th>Parution year</th>
             <th>Genre</th>
+            <th>Delete</th>
+            <th>Update</th>
         </thead>
         @foreach ($books as $book)
             <tr>
-                <td class='title-td' data-id="{{ $book->id }}">{{ $book->title }}</td>
-                <td>{{ $book->author }}</td>
+                <td class='title-td' data-author="{{ $book->author->name }}" data-publication_year="{{ $book->publication_year }}" data-genre="{{ $book->genre }}" data-synopsis="{{ $book->synopsis }}">{{ $book->title }}</td>
+                <td>{{ $book->author->name }}</td>
                 <td>{{ $book->publication_year }}</td>
                 <td>{{ $book->genre }}</td>
+                <td class='delete'>
+                    <form action="/delete_book" method="post">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $book->id }}" />
+                        <input class="delete-button" type="image" src="assets/img/delete.svg" alt="Submit Form" />
+                    </form>
+                </td>
+                <td class='modify'>
+                    <form action="/modify_book_form" method="post">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $book->id }}" />
+                        <input class="modify-button" type="image" src="assets/img/modify.svg" alt="Submit Form" />
+                    </form>
+                </td>
             </tr>
         @endforeach
     </table>
@@ -38,9 +68,11 @@
     <div class='none book-detail fixed'>
         <img src="/assets/img/close.svg" alt="Close button" id="close-icon">
         <h2 id="title-detail">{{ $books[0]->title }}</h2>
-        <p id="author-detail">Author : <span>{{ $books[0]->author }}</span></p>
-        <p id="parution-detail">Year of publication : <span>{{ $books[0]->publication_year }}</span></p>
-        <p id="genre-detail">Genre : <span>{{ $books[0]->genre }}</span></p>
-        <p id="synopsis-detail">Résumé : <span>{{ $books[0]->synopsis }}</span></p>
+        <p>Author : <span id="author-detail">{{ $books[0]->author->name }}</span></p>
+        <p>Year of publication : <span id="parution-detail">{{ $books[0]->publication_year }}</span></p>
+        <p>Genre : <span id="genre-detail">{{ $books[0]->genre }}</span></p>
+        <p>Synopsis : <span id="synopsis-detail">{{ $books[0]->synopsis }}</span></p>
     </div>
+
+    <a href="/book_form" id="add-book-button">Add a book</a>
 @endsection

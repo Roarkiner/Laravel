@@ -1,0 +1,11 @@
+main p{
+    font-size: large;
+}
+
+#main-illustration{
+    display: block;
+    margin: 30px auto;
+    border: 1px solid #000;
+    width: 100%;
+    max-width: 800px;
+}

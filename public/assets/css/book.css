@@ -1,12 +1,13 @@
-main{
-    overflow-y: scroll;
+.none{
+    display: none;
 }
 
 table{
-    position: relative;
     border-collapse: collapse;
     margin: 0 auto;
     border: 3px solid black;
+    table-layout: fixed;
+    width: 100%; 
 }
 
 th, td{
@@ -15,6 +16,7 @@ th, td{
     font-size: 1.4em;
     border-collapse: collapse;
     text-align: center;
+    word-break: break-all;
 }
 
 th{
@@ -22,7 +24,7 @@ th{
     border: 3px solid black;
 }
 
-td:first-child:hover{
+.title-td:hover{
     color: blue;
     text-decoration: underline;
     cursor: pointer;
@@ -47,6 +49,7 @@ tr:nth-child(even), thead{
     z-index: 3;
     padding: 20px;
     font-size: large;
+    overflow-y: scroll;
 }
 
 .background-dark{
@@ -61,8 +64,8 @@ tr:nth-child(even), thead{
 
 #close-icon{
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 10px;
+    right: 10px;
     width: 20px;
     cursor: pointer;
 }
@@ -83,10 +86,51 @@ tr:nth-child(even), thead{
     font-size: large;
 }
 
-#author-detail span{
+#author-detail{
     font-style: italic;
 }
 
-#parution-detail span{
+#parution-detail{
     font-weight: bold;
+}
+
+#add-book-button{
+    display: block;
+    width: fit-content;
+    text-align: center;
+    margin: 15px auto 30px auto;
+    color: black;
+    text-decoration: none;
+    border: 1px solid black;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+#add-book-button:hover{
+    background-color: #aaa;
+    box-shadow: 5px 5px 2px inset #888;
+}
+
+.delete-button, .modify-button{
+    margin: 5px;
+    width: 30px;
+}
+
+.modify-button:hover{
+    filter: opacity(0.5);
+}
+
+.status{
+    display: block;
+    margin: 0 0 5px 0;
+    font-size: larger;
+    color: rgb(9, 150, 9);
+    font-weight: bolder;
+    text-align: center;
+}
+
+@media screen and (max-width: 1000px) {
+    table{
+        display: none;
+    }
 }

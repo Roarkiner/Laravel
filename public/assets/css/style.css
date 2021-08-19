@@ -56,6 +56,13 @@ main{
 
 h1{
     color: #FE4A49;
+    width: fit-content;
+    animation-name: title;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-delay: 0s;
+    animation-timing-function: linear;
+    animation-direction: normal;
 }
 
 footer{
@@ -68,4 +75,16 @@ footer{
     border-top: 1px solid #333;
     position: relative;
     left: calc((100vw)*(-0.2));
+}
+
+@keyframes title{
+    0%{
+        transform: rotate3d(0, 0, 0) skew(0);
+    }
+    50%{
+        transform: rotate3d(1, 5, 0.5, 2turn) skew(70deg);
+    }
+    100%{
+        transform: rotate3d(1, 5, 0.5, 4turn) skew(0deg);
+    }
 }
